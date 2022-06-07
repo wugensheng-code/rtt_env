@@ -10,7 +10,7 @@ If you find a bug, please report it in the issue and I will actively fix it.
 
 Mainly modified the following points:
 
-* Use python's [Kconfiglib](https://github.com/ulfalizer/Kconfiglib) and its menuconfig interface to replace the original [kconfig-frontend](http://ymorin.is-a-geek.org/projects/kconfig-frontends).The purpose of this was originally to make the scripts under rt-thread/tools more refreshing, and to use python to expand more easily, or to combine with other tools.
+* Use python's [Kconfiglib](https://github.com/ulfalizer/Kconfiglib) and its menuconfig interface to replace the original [kconfig-frontend](http://ymorin.is-a-geek.org/projects/kconfig-frontends).The purpose of this was originally to make the scripts under rt-thread/tools more refreshing, and to use python to expand more easily, or to combine with other tools.After using it, it will be found that it will respond faster than before.
 * The original env script, the function of menuconfig, and SCons are combined into one command line tool and packaged in the format of python wheel.The purpose of this is to install and use env in a consistent way on different platforms.
 
 ## How to install
