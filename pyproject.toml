@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "env"
 version = "0.1.0"
-description = ""
+description = "Command line tool to assist RT-Thread development"
 authors = ["shinu <shinu_61@163.com>"]
 readme = "README.rst"
 
