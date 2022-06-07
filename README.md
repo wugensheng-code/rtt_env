@@ -4,6 +4,8 @@ Command line tool to assist RT-Thread development
 
 This project is modified from RT-Thread's [env](https://github.com/RT-Thread/env) script
 
+The code has not been modified yet, so you will see a lot of unfinished code in the repository.
+
 Mainly modified the following points:
 
 * Use python's [Kconfiglib](https://github.com/ulfalizer/Kconfiglib) and its menuconfig interface to replace the original [kconfig-frontend](http://ymorin.is-a-geek.org/projects/kconfig-frontends).The purpose of this was originally to make the scripts under rt-thread/tools more refreshing, and to use python to expand more easily, or to combine with other tools.
