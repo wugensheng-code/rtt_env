@@ -21,14 +21,14 @@ def init():
         try:
             repo = Repo(repo_dir=config.PKGS_DIR, repo_url=config.INDEX_REPO)
             repo.clone()
+            with open(config.PKGS_DIR / 'Kconfig', mode='x') as f:
+                f.write('source "$PKGS_DIR/packages/Kconfig"')
+            typer.secho('==============================>    Package repository index initialization completed\n',
+                fg=typer.colors.GREEN,
+                bold=True)
         except Exception as e:
             typer.secho(e, fg=typer.colors.RED, bold=True)
             exit(0)
-        with open(config.PKGS_DIR / 'Kconfig', mode='x') as f:
-            f.write('source "$PKGS_DIR/packages/Kconfig"')
-    typer.secho('==============================>    Package repository index initialization completed\n',
-                fg=typer.colors.GREEN,
-                bold=True)
 
 
 @app.command()
