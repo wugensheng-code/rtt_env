@@ -1,4 +1,3 @@
-# from .pkgs import Pkgs
 import click_spinner
 import typer
 from ..utils.settings import config
@@ -7,28 +6,6 @@ from .cmd_package_update import package_update
 from .repo import Repo
 
 app = typer.Typer(help='RT-Thread package tool.')
-
-
-@app.command()
-def init():
-    ''' Initialize the package repository index. '''
-
-    typer.secho('==============================>    Start initializing the package repository index',
-                fg=typer.colors.MAGENTA,
-                bold=True)
-
-    with click_spinner.spinner():  # type: ignore
-        try:
-            repo = Repo(repo_dir=config.PKGS_DIR, repo_url=config.INDEX_REPO)
-            repo.clone()
-            with open(config.PKGS_DIR / 'Kconfig', mode='x') as f:
-                f.write('source "$PKGS_DIR/packages/Kconfig"')
-            typer.secho('==============================>    Package repository index initialization completed\n',
-                fg=typer.colors.GREEN,
-                bold=True)
-        except Exception as e:
-            typer.secho(e, fg=typer.colors.RED, bold=True)
-            exit(0)
 
 
 @app.command()

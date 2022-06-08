@@ -3,7 +3,7 @@ name = "env"
 version = "0.1.0"
 description = "Command line tool to assist RT-Thread development"
 authors = ["shinu <shinu_61@163.com>"]
-readme = "README.rst"
+readme = "README.md"
 
 [tool.poetry.scripts]
 rtt = "env.main:app"
