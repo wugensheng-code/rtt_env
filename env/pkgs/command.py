@@ -53,8 +53,7 @@ def update(force: bool = typer.Option(False, help='Whether to force an update'))
             # print(pkgs.update_info)
             # pkgs.update()
             package_update(force_update=force)
+            typer.secho('==============================>    Package update complete', fg=typer.colors.GREEN, bold=True)
         except Exception as e:
             typer.secho(e, fg=typer.colors.RED, bold=True)
             exit(0)
-
-    typer.secho('==============================>    Package update complete', fg=typer.colors.GREEN, bold=True)

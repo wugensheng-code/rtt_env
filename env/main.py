@@ -10,6 +10,7 @@ from .pkgs import command as pkgs
 from .pkgs.repo import Repo
 from .utils.KTemplate import Kconfigfile
 from .utils.settings import config
+from shutil import rmtree
 
 
 app = typer.Typer(help='RT-Thread Command line tool')
@@ -64,6 +65,7 @@ try:
                         bold=True)
                 except Exception as e:
                     typer.secho(e, fg=typer.colors.RED, bold=True)
+                    rmtree(config.ENV_DIR)
                     exit(0)
 
         @app.callback()

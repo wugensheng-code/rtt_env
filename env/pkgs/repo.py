@@ -19,10 +19,10 @@ class Repo(object):
 
     def clone(self):
         print(self.repo_dir)
-        return subprocess.run(f'git clone {self.index_repo} {self.repo_dir}', shell=True)
+        return subprocess.run(f'git clone {self.index_repo} {self.repo_dir}', shell=True, check=True)
 
     def fetch(self, force=False) -> None:
         print(self.repo_dir)
         ret = subprocess.run(f'git -C {self.repo_dir} fetch --all', shell=True)
         if force:
-            subprocess.run(f'git -C {self.repo_dir} reset --hard origin/master', shell=True)
+            subprocess.run(f'git -C {self.repo_dir} reset --hard origin/master', shell=True, check=True)
