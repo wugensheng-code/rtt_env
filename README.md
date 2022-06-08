@@ -18,7 +18,7 @@ Mainly modified the following points:
 It has not been released to python's PyPi yet, so it needs to be installed by the following command
 
 ``` shell
-    pip install .env-0.1.0-py3-none-any.whl
+    pip install env-0.1.0-py3-none-any.whl
 ```
 
 ## How to use
