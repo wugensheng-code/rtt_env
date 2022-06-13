@@ -1,7 +1,11 @@
+'''
+pkg manager command
+'''
+
 import click_spinner
 import typer
-from ..utils.settings import config
 
+from ..utils.settings import config
 from .cmd_package_update import package_update
 from .repo import Repo
 

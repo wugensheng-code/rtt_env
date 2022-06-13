@@ -14,7 +14,7 @@ class Pkgs(object):
         # 1. 更新列表
         # 2. 数据库
 
-        super(object, self).__init__()
+        super().__init__()
         self.dotconfig_list = list()
         self.bsp_pkgs_dir = Path(BSP_DIR) / 'packages'
         if not self.bsp_pkgs_dir.exists():
@@ -214,7 +214,8 @@ class Pkgs(object):
                        'Accept': '*/*',
                        'User-Agent': 'curl/7.54.0'}
 
-            print('Start to download package : %s ' % filename.encode("utf-8"))
+            # print('Start to download package : %s ' % filename.encode("utf-8"))
+            print(f'Start to download package : {filename} ')
 
             while True:
                 # print("retry_count : %d"%retry_count)

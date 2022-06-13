@@ -46,7 +46,8 @@ def unpack(archive_filename, bsp_package_path, package_info, package_name):
                     right_path = a
                 a = os.path.join(os.path.split(right_path)[0], os.path.split(right_path)[1])
 
-                pkgsdb.save_to_database(a, archive_filename)
+                # pkgsdb.save_to_database(a, archive_filename)
+                save_to_database(a, archive_filename)
         arch.close()
 
     if ".tar.gz" in archive_filename:
@@ -60,7 +61,8 @@ def unpack(archive_filename, bsp_package_path, package_info, package_name):
                 else:
                     right_path = a
                 a = os.path.join(os.path.split(right_path)[0], os.path.split(right_path)[1])
-                pkgsdb.save_to_database(a, archive_filename)
+                # pkgsdb.save_to_database(a, archive_filename)
+                save_to_database(a, archive_filename)
         arch.close()
 
     if ".zip" in archive_filename:
@@ -105,7 +107,8 @@ def handle_zip_package(archive_filename, bsp_package_path, package_name, package
 
                 right_name_to_db = right_path.replace(package_folder_name, package_name_with_version, 1)
                 right_path = os.path.join("package_temp", right_path)
-                pkgsdb.save_to_database(right_name_to_db, archive_filename, right_path)
+                # pkgsdb.save_to_database(right_name_to_db, archive_filename, right_path)
+                save_to_database(right_name_to_db, archive_filename, right_path)
         arch.close()
 
         if not move_package_to_bsp_packages(package_folder_name, package_name, package_temp_path, package_version,

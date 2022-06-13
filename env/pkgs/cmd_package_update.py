@@ -32,15 +32,14 @@ import shutil
 import time
 
 import requests
-
-from ..utils.archive import *
-from ..utils.kconfig import parse, pkgs_path, pkgs_ver
-from ..utils.pkgsdb import *
-from .package import PackageOperation, Bridge_SConscript
-from ..utils.vars import Export
-from .cmd_package_utils import get_url_from_mirror_server, execute_command, git_pull_repo, user_input, \
+from env.utils.archive import *
+from env.utils.kconfig import parse, pkgs_path, pkgs_ver
+from env.utils.pkgsdb import *
+from env.pkgs.package import PackageOperation, Bridge_SConscript
+from env.utils.vars import Export
+from env.pkgs.cmd_package_utils import get_url_from_mirror_server, execute_command, git_pull_repo, user_input, \
     find_macro_in_config
-from ..utils.settings import config
+from env.utils.settings import config
 from pathlib import Path, PurePath
 
 
@@ -253,7 +252,7 @@ def install_package(env_root, pkgs_root, bsp_root, package_info, force_update):
     pkg_path = package_info['path']
     if pkg_path[0] == '/' or pkg_path[0] == '\\':
         pkg_path = pkg_path[1:]
-    pkg_path = os.path.join(pkgs_root.strip('packages'), pkg_path, 'package.json')
+    pkg_path = os.path.join(pkgs_root, pkg_path, 'package.json')
     package.parse(pkg_path)
 
     url_from_json = package.get_url(package_info['ver'])
@@ -367,7 +366,7 @@ def update_latest_packages(sys_value):
     # env_root = Import('env_root')
     # pkgs_root = Import('pkgs_root')
     # pkgs_root = DEFAULT_CONFIG.get('PKGS_ROOT')
-    pkgs_root = PurePath(config.PKGS_ROOT).parent
+    pkgs_root = PurePath(config.PKGS_DIR).parent
 
     # env_config_file = os.path.join(env_root, r'tools\scripts\cmds', '.config')
 
@@ -381,7 +380,7 @@ def update_latest_packages(sys_value):
         if pkg_path[0] == '/' or pkg_path[0] == '\\':
             pkg_path = pkg_path[1:]
 
-        pkg_path = os.path.join(pkgs_root, pkg_path, 'package.json')
+        pkg_path = os.path.join(pkgs_root / 'packages', pkg_path, 'package.json')
         package.parse(pkg_path)
         pkgs_name_in_json = package.get_name()
 
@@ -467,7 +466,7 @@ def pre_package_update():
     """ Make preparations before updating the software package. """
 
     logging.info("Begin prepare package update")
-    bsp_root = config.BSP_ROOT
+    bsp_root = config.BSP_DIR
     if bsp_root is None:
         print('Please set BSP_ROOT path in configuration file :{} or environment variable'.format(
             Path.home() / 'rtconfig' / 'settings'))
@@ -512,7 +511,7 @@ def pre_package_update():
     # prepare target packages file
     dbsqlite_pathname = os.path.join(bsp_packages_path, 'packages.dbsqlite')
     Export('dbsqlite_pathname')
-    dbsqlite_pathname = dbsqlite_pathname.encode('utf-8').decode('gbk')
+    # dbsqlite_pathname = dbsqlite_pathname.encode('utf-8').decode('gbk')
 
     # avoid creating tables more than one time
     if not os.path.isfile(dbsqlite_pathname):
@@ -567,9 +566,9 @@ def pre_package_update():
 
 
 def error_packages_handle(error_packages_list, read_back_pkgs_json, package_filename, force_update):
-    bsp_root = config.BSP_ROOT
-    env_root = PurePath(config.PKGS_ROOT).parent
-    pkgs_root = config.PKGS_ROOT
+    bsp_root = config.BSP_DIR
+    env_root = PurePath(config.PKGS_DIR).parent
+    pkgs_root = config.PKGS_DIR
     download_error = []
     flag = True
 
@@ -784,9 +783,9 @@ def install_packages(sys_value, force_update):
 
     package_filename = sys_value[3]
     # bsp_root = Import('bsp_root')
-    bsp_root = config.BSP_ROOT
-    pkgs_root = config.PKGS_ROOT
-    env_root = PurePath(config.PKGS_ROOT).parent
+    bsp_root = config.BSP_DIR
+    pkgs_root = config.PKGS_DIR
+    env_root = PurePath(config.PKGS_DIR).parent
 
     case_download = sub_list(new_package, old_package)
     packages_download_fail_list = []

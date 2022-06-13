@@ -1,11 +1,17 @@
-from pathlib import Path
+'''
+Public configuration
+'''
+
 import locale
+from pathlib import Path
+
 import typer
 
-class Configuration(object):
 
+class Configuration(object):
+    ''' Public configuration '''
     def __init__(self):
-        super(object, self).__init__()
+        super().__init__()
         self.lang = locale.getdefaultlocale()[0]
 
     @property

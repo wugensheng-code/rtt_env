@@ -7,7 +7,7 @@ class Repo(object):
 
     def __init__(self, repo_dir=config.PKGS_DIR, repo_url=config.INDEX_REPO) -> None:
 
-        super(object, self).__init__()
+        super().__init__()
         self.repo_dir = Path(repo_dir) / 'packages'
         self.index_repo = repo_url
 

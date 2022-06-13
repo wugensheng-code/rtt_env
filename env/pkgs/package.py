@@ -208,7 +208,8 @@ class PackageOperation:
             'User-Agent': 'curl/7.54.0'
         }
 
-        print('Start to download package : %s ' % filename.encode("utf-8"))
+        # print('Start to download package : %s ' % filename.encode("utf-8"))
+        print(f'Start to download package : {filename} ')
 
         while True:
             # print("retry_count : %d"%retry_count)
