@@ -4,7 +4,7 @@ Command line tool to assist RT-Thread development
 
 This project is modified from RT-Thread's [env](https://github.com/RT-Thread/env) script
 
-The code has not been fully revised, so you will see a lot of unfinished code in the repository.
+The code has not been fully modified, so you will see a lot of unfinished code in the repository.
 
 If you find a bug, please report it in the issue and I will actively fix it.
 
