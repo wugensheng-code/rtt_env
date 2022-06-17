@@ -5,12 +5,15 @@ from typing import Optional
 
 import click_spinner
 import typer
+import operator
 
-from .pkgs import command as pkgs
-from .pkgs.repo import Repo
-from .utils.KTemplate import Kconfigfile
-from .utils.settings import config
-from shutil import rmtree
+from env.pkgs import command as pkgs
+from env.pkgs.repo import Repo
+from env.utils.Ktemplate import Kconfigfile
+from env.utils.settings import config
+from env.utils.mk_rtconfig import mk_rtconfig
+from env.utils.filediff import get_file_md5
+from shutil import rmtree, copyfile
 
 
 app = typer.Typer(help='RT-Thread Command line tool')
@@ -43,6 +46,18 @@ try:
                 env['BSP_DIR'] = str(config.BSP_DIR)
                 try:
                     subprocess.run('python -m menuconfig', shell=True, env=env)
+                    if Path('.config').is_file():
+                        if Path('.config.old').is_file():
+                            diff_eq = operator.eq(get_file_md5('.config'), get_file_md5('.config.old'))
+                        else:
+                            diff_eq = False
+                    else:
+                        raise FileNotFoundError('No .config file was found under the current path')
+
+                    # make rtconfig.h
+                    if diff_eq == False:
+                        copyfile('.config', '.config.old')
+                        mk_rtconfig('.config')
                 except Exception as e:
                     print(e)
     else:
