@@ -5,6 +5,7 @@ Public configuration
 import locale
 from pathlib import Path
 
+import os
 import typer
 
 
@@ -20,6 +21,8 @@ class Configuration(object):
 
     @property
     def RTT_DIR(self):
+        if os.getenv('RTT_ROOT'):
+            return Path(os.getenv('RTT_ROOT')).resolve()
         return Path(self._ver_in_Kconfig('RTT_DIR')).resolve()
 
     @property
